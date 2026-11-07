@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือกที่นั่ง</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div class="wrap">
+        <main class="card">
+            <h1>เลือกที่นั่ง</h1>
+            <p class="hint" style="margin:16px">เลือกเวลา โซนที่นั่ง เเล้วกดบนผัง</p>
+            <div class="sec">
+                <h2>เวลา</h2>
+                <div class="chips" id="times"></div>
+            </div>
+            <div class="sec">
+                <h2>จำนวนที่นั่ง</h2>
+                <div class="stepper">
+                    <button id="minus" aria-label="ลด">-</button>
+                    <b id="cnt">2</b>
+                    <button id="plus" aria-label="เพิ่ม">+</button>
+                </div>
+            </div>
+            <div class="sec">
+                <h2>โซนที่นั่ง</h2>
+                <div class="chips" id="zones"></div>
+            </div>
+            <div class="screen"></div>
+            <div class="screen-l">ด้านหน้า / จอ</div>
+            <div class="map">
+                <div class="grid" id="grid"></div>
+            </div>
+            <div class="legend" id="legend"></div>
+        </main>
+
+        <aside class="card sum">
+            <h2>สรุปการจอง</h2>
+            <div id="info" style="font-size: 14px;margin-bottom:8px"></div>
+            <ul id="list"> </ul>
+            <div class="total">
+            </div>
+            <button class="btn" id="go" disabled>ยืนยันการจอง</button>
+            <p class="hint" id="hint"></p>
+            <h2 style="margin-top:20px">รายการจอง</h2>
+            <div id="bookings"></div>
+        </aside>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="card">
+            <div style="font-size: 40px;">🍊</div>
+            <h1>จองสำเร็จ</h1>
+            <p id="done" style="color:var(--muted)"></p>
+            <button class="btn" id="close">ตกลง</button>
+        </div>
+    </div>
+
+ <script src="script.js"></script>
+</body>
+</html>

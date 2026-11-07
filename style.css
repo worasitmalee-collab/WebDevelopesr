@@ -1,0 +1,372 @@
+:root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg: #f5f5f5;
+    --color: #fff;
+    --text: #1b1f2a;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #4f46e5;
+    --accent-t: #fff;
+    --vip: #f59e0b;
+    --std: #3b82f6;
+    --eco : #66cc66;
+    --booked: #cecece;
+    --sel: #4f46e5;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #1e1e1e;
+        --card: #181717;
+        --text: #e8eaf0;
+        --muted: #aaaaaa;
+        --line: #9aa3b2;
+        --accent: #2a2f3b;
+        --accent-t: #818cf8;
+        --booked: #2f3544;
+        --sel : #818cf8;
+    }
+}
+
+
+:root[data-theme="dark"] {
+    --bg: #0f1117;
+    --card: #181b24;
+    --text: #e8eaf0;
+    --muted: #9aa3b2;
+    --line: #2a2f3b;
+    --accent: #818cf8;
+    --accent-t:#0f1117;
+    --booked: #2f3544;
+    --sel : #818cf8;
+}
+
+    html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif ;
+        line-height: 1.5;
+    }
+    /* กรอบ */
+    .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 16px;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 860px) {
+        .wrap {
+            grid-template-columns: 1fr 300px;
+            align-items: start;
+        }
+    }
+     /* กรอบช้าย */
+    .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin: 0 0 4px;
+    }
+    /* หัวข้อเลือกเวลา */
+    h2 {
+        font-size: 14px;
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-weight: 600;
+    }
+    /* ขนาดเวลา */
+    .sec {
+        margin-bottom: 16px;
+    }
+    /* ระยะห่างเเต่ละล็อค */
+    .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    /* ตกเเต่งขนาดกรอบtime */
+    .chip {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        padding: 8px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 14px;
+    }
+
+    /* ตกเเต่งใส่สีตอนกด */
+    .chip[aria-pressed="true"] {
+        background: var(--accent);
+        color: var(--accent-t);
+        border-color: var(--accent);
+    }
+
+
+    .stepprt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }   
+/* ปุ่มเพื่มลดจำนวน */
+    .stepper button { 
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text);
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .stepper b {
+        min-width: 24px;
+        text-align: center;
+        font-size: 18px;
+    }
+/* โชนที่นั่ง */
+    .screen {
+        height: 8px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        margin: 8px auto 4px;
+        width: 70%;
+    }
+/* หน้าจอ */
+    .screen-l {
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 16px;
+    }
+
+    .map {
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .grid {
+        display : grid;
+        gap: 6px;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .row {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .rl {
+        width: 18px;
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .seat {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px 8px 4px 4px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        font-size: 10px;
+        color: #fff;
+        padding: 0;
+        font-weight: 600;
+    }
+
+    .seat.vip {
+        background: var(--vip);
+    }
+
+    .seat.std {
+        background: var(--std);
+    }
+
+    .seat.eco {
+        background: var(--eco);
+    }
+
+    .seat.booked {
+        background: var(--booked);
+        cursor: not-allowed;
+        color: transparent;
+    }
+    
+    .seat.dim {
+        opacity: 0.25;
+    }
+    .seat.sel {
+        background: var(--sel);
+        border-color: var(--text);
+        color: transparent;
+    }
+
+    .seat:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .aisle {
+        width: 36px;
+    }
+
+    .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 12px;
+        justify-content: center;
+    }
+
+    .legend i {
+        display : inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        margin-right: 4px;
+        vertical-align: -1px;
+    }
+
+    .sum li {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        padding : 6px 0;
+        border-bottom: 1px dashed var(--line);
+        list-style: none;
+    }
+
+    .sum ul {
+        padding: 0;
+        margin: 0 0 12px;
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 18px;
+        margin: 8px 0 12px;
+    }
+    /* ปุ่มยืนยันการจอง */
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-t);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .hint {
+        font-size: 16px;
+        color: var(--muted);
+        margin: 8px 0 0;
+    }
+
+    .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+    }
+
+    .modal.on {
+        display: flex;
+    }
+
+    .modal .card {
+        max-width: 360px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .seat.mine {
+        background: var(--accent);
+        border-color: var(--text);
+        cursor: default;
+        color: var(--accent-t);
+    }
+
+    .bk {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .bk-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .bk small {
+        color: var(--muted);
+    }
+
+    .bk-cancel {
+        border: 1px solid #ef4444 ;
+        color: #ef4444;
+        background: transparent;
+        border-radius: 8px;
+        padding: 4px 10px;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .bk-cancel:hover {
+        background: #ef4444;
+        color: #fff;
+    }
+
+    .empty {
+        font-size: 13px;
+        color:var(--muted)
+    }
+
+    .seat.broken {
+    background: transparent;
+    border: 2px dashed var(--line);
+    color: var(--muted);
+    cursor: not-allowed;
+}
