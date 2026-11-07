@@ -56,8 +56,21 @@
         background: var(--bg);
         color: var(--text);
         font-family: "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif ;
-        line-height: 1.5;
+        line-height: 1.6;
     }
+
+    /* หน้าล็อกอินรหัสนักศึกษา */
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 16px;
+    }
+
+    /* .login-card {
+    
+    } */
     /* กรอบ */
     .wrap {
         max-width: 1000px;
@@ -256,40 +269,39 @@
         display: flex;
         justify-content: space-between;
         font-size: 14px;
-        padding : 6px 0;
+        padding : 8px 0;
         border-bottom: 1px dashed var(--line);
         list-style: none;
     }
 
     .sum ul {
         padding: 0;
-        margin: 0 0 12px;
+        margin: 0 0 16px;
     }
 
-    .total {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 700;
-        font-size: 18px;
-        margin: 8px 0 12px;
-    }
     /* ปุ่มยืนยันการจอง */
     .btn {
         width: 100%;
-        padding: 12px;
+        padding: 14px;
         border: 0;
-        border-radius: 8px;
+        border-radius: 12px;
         background: var(--accent);
         color: var(--accent-t);
         font: inherit;
         font-weight: 700;
         cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
     }
 
     .btn:disabled {
         opacity: 0.4;
         cursor: not-allowed;
     }
+
 
     .hint {
         font-size: 16px;
@@ -300,7 +312,7 @@
     .modal {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(15, 23, 42, 0.6);
         display: none;
         align-items: center;
         justify-content: center;
@@ -315,13 +327,6 @@
         max-width: 360px;
         width: 100%;
         text-align: center;
-    }
-
-    .seat.mine {
-        background: var(--accent);
-        border-color: var(--text);
-        cursor: default;
-        color: var(--accent-t);
     }
 
     .bk {
@@ -347,9 +352,10 @@
         color: #ef4444;
         background: transparent;
         border-radius: 8px;
-        padding: 4px 10px;
+        padding: 6px 10px;
         font: inherit;
         font-size: 13px;
+        font-weight: 600;
         cursor: pointer;
         white-space: nowrap;
     }
@@ -363,10 +369,21 @@
         font-size: 13px;
         color:var(--muted)
     }
-
-    .seat.broken {
+/* ตัวปรับขนาดรหัส11 */
+    .inp {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
     background: transparent;
-    border: 2px dashed var(--line);
-    color: var(--muted);
-    cursor: not-allowed;
-}
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+    }
+
+    .inp:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    

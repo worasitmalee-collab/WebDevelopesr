@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายงานการจอง</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .page{max-width:1000px;margin:0 auto;padding:16px}
+  .tbl{overflow-x:auto;margin-bottom:24px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  th{color:var(--muted);font-weight:600}
+  .off{color:#ef4444}
+</style>
+</head>
+<body>
+<div class="page"><main class="card">
+  <h1>รายงานการจอง</h1>
+  <p><a href="index.html" style="color:var(--text)">← กลับหน้าจอง</a></p>
+  <div class="chips sec" id="tabs"></div>
+  <h2>สรุป (นับตามวันที่ใช้งาน)</h2>
+  <div class="tbl"><table><thead><tr><th id="ph">วันที่</th><th>จำนวนการจอง</th><th>จำนวนที่นั่ง</th><th>ยกเลิก</th></tr></thead><tbody id="sum"></tbody></table></div>
+  <h2>บันทึกล่าสุด 100 รายการ (วันเวลาที่บันทึกเข้าระบบ)</h2>
+  <div class="tbl"><table><thead><tr><th>#</th><th>วันที่ใช้งาน</th><th>รอบ</th><th>ที่นั่ง</th><th>ชื่อ</th><th>สถานะ</th><th>บันทึกเมื่อ</th><th>ยกเลิกเมื่อ</th></tr></thead><tbody id="log"></tbody></table></div>
+</main></div>
+<script>
+const TABS=[["day","รายวัน","วันที่"],["month","รายเดือน","เดือน"],["year","รายปี","ปี"]];
+let type="day";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function tabs(){
+  const box=document.getElementById("tabs");box.innerHTML="";
+  TABS.forEach(([v,label])=>{const b=document.createElement("button");b.className="chip";b.textContent=label;
+    b.setAttribute("aria-pressed",type===v);b.onclick=()=>{type=v;load()};box.appendChild(b)});
+}
+async function load(){
+  tabs();
+  document.getElementById("ph").textContent=TABS.find(t=>t[0]===type)[2];
+  try{
+    const res=await fetch("api.php?action=report&type="+type);const d=await res.json();
+    if(!res.ok)throw new Error(d.error);
+    document.getElementById("sum").innerHTML=d.summary.length?d.summary.map(r=>`<tr><td>${esc(r.period)}</td><td>${r.bookings}</td><td>${r.seats}</td><td>${r.cancelled}</td></tr>`).join(""):'<tr><td colspan="4">ยังไม่มีข้อมูล</td></tr>';
+    document.getElementById("log").innerHTML=d.log.length?d.log.map(r=>`<tr><td>${r.id}</td><td>${esc(r.booking_date)}</td><td>${esc(r.time_slot)}</td><td>${esc(r.seats)}</td><td>${esc(r.customer_name)}</td><td class="${r.status==="cancelled"?"off":""}">${r.status==="cancelled"?"ยกเลิก":"จองอยู่"}</td><td>${esc(r.created_at)}</td><td>${esc(r.cancelled_at||"-")}</td></tr>`).join(""):'<tr><td colspan="8">ยังไม่มีข้อมูล</td></tr>';
+  }catch(e){alert(e.message||"โหลดรายงานไม่สำเร็จ")}
+}
+load();
+</script>
+</body>
+</html>

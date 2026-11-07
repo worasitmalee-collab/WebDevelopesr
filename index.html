@@ -6,13 +6,36 @@
     <title>เลือกที่นั่ง</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-    <div class="wrap">
+
+    <div id="login-screen" class="login-container">
+        <div class="card login-card">
+            <div style="font-size: 48px; margin-bottom: 8px;"><img src="images-Photoroom.png" alt=""></div>
+            <h1>เข้าสู่ระบบจองคอมพิมเตอร์</h1>
+            <p class="hint">กรุณากรอกรหัสนักศึกษา 11 หลักเพื่อ ใช้งาน</p>
+            <div class="sec" style="margin-top:  20px;"> <!--กล่องใส่รหัส-->
+                <input type="text" id="student-id-input" class="inp" placeholder="รหัสนักศึกษา 11 หลัก" maxlength="11" autocomplete="off">
+            </div>
+            <button class="btn" id="login-btn">ตรวจสอบรหัส</button>
+        </div>
+    </div>
+
+<!-- เพิ่มคลาส -->    <!-- หน้าเลือกที่นั่ง (ซ่อนไว้ก่อนจนกว่าจะล็อกอินผ่าน) -->
+    <div class="wrap" id="main-app" style="display: none;">
         <main class="card">
-            <h1>เลือกที่นั่ง</h1>
-            <p class="hint" style="margin:16px">เลือกเวลา โซนที่นั่ง เเล้วกดบนผัง</p>
+            <div class="header-flex">
+                <div>
+                    <h1>เลือกที่นั่ง</h1>
+                    <p class="hint" style="margin:16px">เลือกเวลา โซนที่นั่ง เเล้วกดบนผัง</p> //รอเเก้
+                </div>
+                <!-- 1. แสดงช่องเวลาแบบเรียลไทม์ -->
+                <div class="live-clock" id="live-clock">--:--:-- น.</div>
+            </div>
+
+            <div class="user-profile-ber" id="user-profile-bar">
+                 <!-- แสดงข้อมูลนักศึกษาที่ล็อกอิน -->
+            </div>
+            
             <div class="sec">
                 <h2>เวลา</h2>
                 <div class="chips" id="times"></div>
@@ -41,24 +64,37 @@
             <h2>สรุปการจอง</h2>
             <div id="info" style="font-size: 14px;margin-bottom:8px"></div>
             <ul id="list"> </ul>
-            <div class="total">
-            </div>
             <button class="btn" id="go" disabled>ยืนยันการจอง</button>
             <p class="hint" id="hint"></p>
             <h2 style="margin-top:20px">รายการจอง</h2>
             <div id="bookings"></div>
+            <p style="margin-top: 15px;"><a href="report.html" style="color:var(--accent); text-decoration: none; font-weight: 600;">ดูรายงานการจองทั้งหมด -></a></p>
+            <p><a href="#" id="logout-link" style="color:var(--muted); font-size: 13px;">ออกจากระบบ / เปลี่ยนรหัสนักศึกษา -></a></p>
         </aside>
     </div>
 
+     <!-- Modal แจ้งเตือนทั่วไป / สำเร็จ -->
     <div class="modal" id="modal">
-        <div class="card">
-            <div style="font-size: 40px;">🍊</div>
-            <h1>จองสำเร็จ</h1>
-            <p id="done" style="color:var(--muted)"></p>
+        <div class="card" style="max-width: 380px;">
+            <div style="font-size: 40px;" id="modal-icon">✅</div>
+            <h1 id="modal-title">จองสำเร็จ</h1>
+            <p id="done" style="color:var(--muted); margin: 12px 0 20px"></p>
             <button class="btn" id="close">ตกลง</button>
         </div>
     </div>
 
+    <!-- Modal คลิกที่นั่งเพื่อดูข้อมูลและยกเลิก -->
+    <div class="modal" id="seat-into-modal">
+        <div class="card" style="max-width: 380px; text-align: left;">
+        <div style="text-align: center; font-size: 32px;">💺</div>
+        <h1 style="text-align: center; font-size: 20px; " id="seat-modal-title">ข้อมูลที่นั่ง</h1>
+        <div id="seat-modal-body" style="margin: 15px 0; font-size: 14px; line-height: 1.6;"></div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn" id="seat-modal-close" style="background: var(--muted);">ปิด</button>
+                <button class="btn" id="seat-modal-cancel" style="background: #ef4444; display: none;">ยกเลิกจองที่นั่งนี้</button>
+            </div>
+        </div>
+    </div>
  <script src="script.js"></script>
 </body>
 </html>
