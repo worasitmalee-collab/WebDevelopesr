@@ -27,11 +27,12 @@ const BUSY = {
 };
 // เครื่องที่ไม่ว่าง แยกตามเวลา (สะกดเวลาให้ตรงกับ TIMES)
 const state = {
-    time: TIMES[2],
-    count: 2,
+    time: TIMES[0],
+    count: 1,
     zone: "all",
     sel: [],
     booked: {},
+    seatOwners: [],// เก็บข้อมูลว่าที่นั่งไหนใครจอง { "08:00": { "A1": {id, studentId, name, dept, timeStr} } }
     bookings: [],
 };
 let nextId = 1;

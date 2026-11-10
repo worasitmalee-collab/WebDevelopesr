@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <!-- หน้าใส่รหัสนักศึกษา -->
     <div id="login-screen" class="login-container">
         <div class="card login-card">
             <div style="font-size: 48px; margin-bottom: 8px;"><img src="images-Photoroom.png" alt=""></div>
@@ -26,27 +26,14 @@
             <div class="header-flex">
                 <div>
                     <h1>เลือกที่นั่ง</h1>
-                    <p class="hint" style="margin:16px">เลือกเวลา โซนที่นั่ง เเล้วกดบนผัง</p> //รอเเก้
+                    <p class="hint" style="margin:4px 0 16px">เลือกเวลา โซนที่นั่ง เเล้วกดบนผัง</p> //รอเเก้
                 </div>
                 <!-- 1. แสดงช่องเวลาแบบเรียลไทม์ -->
-                <div class="live-clock" id="live-clock">--:--:-- น.</div>
+                <div class="live-clock">--:--:-- น.</div>
             </div>
 
             <div class="user-profile-ber" id="user-profile-bar">
                  <!-- แสดงข้อมูลนักศึกษาที่ล็อกอิน -->
-            </div>
-            
-            <div class="sec">
-                <h2>เวลา</h2>
-                <div class="chips" id="times"></div>
-            </div>
-            <div class="sec">
-                <h2>จำนวนที่นั่ง</h2>
-                <div class="stepper">
-                    <button id="minus" aria-label="ลด">-</button>
-                    <b id="cnt">2</b>
-                    <button id="plus" aria-label="เพิ่ม">+</button>
-                </div>
             </div>
             <div class="sec">
                 <h2>โซนที่นั่ง</h2>
@@ -61,18 +48,84 @@
         </main>
 
         <aside class="card sum">
-            <h2>สรุปการจอง</h2>
-            <div id="info" style="font-size: 14px;margin-bottom:8px"></div>
+            <h2>เครื่องที่เลือก</h2>
             <ul id="list"> </ul>
             <button class="btn" id="go" disabled>ยืนยันการจอง</button>
             <p class="hint" id="hint"></p>
-            <h2 style="margin-top:20px">รายการจอง</h2>
-            <div id="bookings"></div>
-            <p style="margin-top: 15px;"><a href="report.html" style="color:var(--accent); text-decoration: none; font-weight: 600;">ดูรายงานการจองทั้งหมด -></a></p>
-            <p><a href="#" id="logout-link" style="color:var(--muted); font-size: 13px;">ออกจากระบบ / เปลี่ยนรหัสนักศึกษา -></a></p>
+            <div id="my-box"></div>
+            <p><a href="#" id="logout-link" style="color:var(--muted); font-size: 13px;">ออกจากระบบ-></a></p>
         </aside>
     </div>
 
+    <!-- หน้าเเอดมิน -->
+     <div class="wrap" id="admin-app" style="display:none; grid-template-columns: 1fr;">
+        <class="card">
+            <div class="header-flex">
+                <div>
+                    <h1>ผู้ดูเเล</h1>
+                    <p class="hint" style="margin: 4px 0 16px;">สามารถคุมเครื่องถอนสิทธิ์ เเละจัดการข้อมูลนักศึกษาได้</p>
+                </div>
+                <div class="live-clock">--:--:--</div>
+            </div>
+        <div class="admin-ber">
+            <button class="chip" id="tab-seats" ariaa-pressed="true">ห้องคอม</button>
+            <button class="chip" id="tab-students" aria-pressed="false">-ข้อมูล</button>
+            <a  class="chip" href="report.html">บันทึกการเข้าออก</a>
+            <button class="chip" id="admin-logout">ออกจากระบบ</button>
+        </div>
+
+        <section id="sec-seats">
+            <p class="hint">แตะเครื่องบนผัง: เครื่องว่าง = ล็อก/ปลดล็อก · เครื่องที่มีคนใช้ = ถอดสิทธิ์</p>
+            <div class="screen"></div>
+            <div class="screen-1">ด้านหน้า</div>
+            <div class="map">
+                <div class="grid" id="admin-grid"></div>
+            </div>
+            <div class="legend" id="admin-legend"></div>
+            <h2 style="margin-top: 24px;">นักศึกษาที่ใช้งานอยู่ในขณะนี้</h2>
+        <div class="tbl">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ชื่อ</th>
+                    <th>สาขา</th>
+                    <th>เครื่อง</th>
+                    <th>เข้าเมื่อ</th>
+                   <th>ใช้มาแล้ว</th>
+                </tr>
+            </thead>
+            <tbody id="admin-users"></tbody>
+        </table>
+        </div>
+        <button class="btn" id="release-all" style="background: #ef4444;max-width: 280px;">เคลียร์ที่นั่งทั้งหมด (สิ้นวัน)</button>
+        </section>
+
+    
+        <section id="sec-students" style="display:none">
+                <h2>
+                    เพิ่ม / แก้ไขนักศึกษา
+                </h2>
+                <div class="form-row">
+                    <input id="st-id" class="inp" maxlength="11" inputmode="numeric" placeholder="รหัส 11 หลัก">
+                    <input id="st-name" class="inp" placeholder="ชื่อ-สกุล">
+                    <input id="st-branch" class="inp" placeholder="สาขา">
+                    <button class="btn" id="st-save">บันทึก</button>
+                </div>
+                <h2 style="margin-top:20px">
+                    เพิ่มทีละหลายคน (1 บรรทัดต่อ 1 คน: รหัส,ชื่อ,สาขา)
+                </h2>
+                <textarea id="st-bulk" class="inp" rows="4" placeholder="65312345671,นายสมชาย ใจดี,เทคโนโลยีสารสนเทศ"></textarea>
+                <button class="btn" id="st-import" style="max-width:200px;margin-top:8px">นำเข้า</button>
+                <h2 style="margin-top:20px">รายชื่อนักศึกษาในระบบ</h2>
+                <div class="tbl"><table>
+                    <thead><tr><th>ID</th><th>ชื่อ</th><th>สาขา</th><th></th></tr></thead>
+                    <tbody id="st-table"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
      <!-- Modal แจ้งเตือนทั่วไป / สำเร็จ -->
     <div class="modal" id="modal">
         <div class="card" style="max-width: 380px;">
@@ -95,6 +148,7 @@
             </div>
         </div>
     </div>
+    
  <script src="script.js"></script>
 </body>
 </html>
